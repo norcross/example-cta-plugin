@@ -54,7 +54,7 @@ class SQS2016_Display
 		}
 
 		// Go get my box, and bail if we don't have one.
-		if ( false === $build = self::build_cta_display( $post->ID ) ) {
+		if ( false === $build = self::build_cta_display( $post->ID, $place ) ) {
 			return str_replace( '[squarescta]', '', $content );
 		}
 
@@ -68,7 +68,7 @@ class SQS2016_Display
 	 * @param  array $atts     The shortcode attribute array.
 	 * @param  mixed $content  The post content.
 	 *
-	 * @return [type]          [description]
+	 * @return mixed $build    The shortcode markup embedded with the content.
 	 */
 	public function shortcode( $atts, $content = null ) {
 
@@ -94,17 +94,18 @@ class SQS2016_Display
 		}
 
 		// Return the CTA display build.
-		return self::build_cta_display( $post->ID, 'shortcode' );
+		return self::build_cta_display( $post->ID, $place );
 	}
 
 	/**
 	 * Build out the markup for our call to action.
 	 *
 	 * @param  integer $post_id  The post ID that may contain custom content.
+	 * @param  string  $palce    The selected placement of the CTA. Will be applied to the class.
 	 *
 	 * @return mixed   $build    The CTA box itself.
 	 */
-	public static function build_cta_display( $post_id = 0 ) {
+	public static function build_cta_display( $post_id = 0, $place = '' ) {
 
 		// Fetch our postmeta items.
 		$title  = SQS2016_Helper::get_single_postmeta( $post_id, '_squares_post_cta', '', 'title' );
@@ -125,11 +126,14 @@ class SQS2016_Display
 			return;
 		}
 
+		// Set a class to use.
+		$class  = ! empty( $place ) ? 'squares-cta-box-' . esc_attr( $place ) . ' squares-cta-box' : 'squares-cta-box';
+
 		// Now begin the markup build.
 		$build  = '';
 
 		// But a box around it.
-		$build .= '<div id="squares-cta-box-' . absint( $post_id ) . '" class="squares-cta-box">';
+		$build .= '<div id="squares-cta-box-' . absint( $post_id ) . '" class="' . esc_html( $class ) . '">';
 
 			// Got a title? Let's show them that special title.
 			$build .= ! empty( $title ) ? '<h3 class="squares-cta-box-title">' . esc_attr( $title ) . '</h3>' : '';
