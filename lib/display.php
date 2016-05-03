@@ -41,7 +41,7 @@ class SQS2016_Display
 		global $post;
 
 		// Check for the disable flag and bail right away if it's there.
-		if ( false !== $check = SQS2016_Helper::get_single_postmeta( $post->ID, '_squares_post_disable' ) ) {
+		if ( false !== $check = SQS2016_Helper::get_single_postmeta( $post->ID, '_squares_post_cta_disable' ) ) {
 			return str_replace( '[squarescta]', '', $content );
 		}
 
@@ -50,7 +50,7 @@ class SQS2016_Display
 
 		// If we set to "manual", then bail.
 		if ( 'manual' === $place ) {
-			return str_replace( '[squarescta]', '', $content );
+			return $content;
 		}
 
 		// Go get my box, and bail if we don't have one.
