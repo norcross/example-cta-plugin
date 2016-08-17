@@ -1,16 +1,16 @@
 <?php
 /**
- * Squares 2016 CTA - helper functions
+ * Example CTA Plugin - helper functions
  *
  * Contains various helper related functions.
  *
- * @package Squares 2016 CTA
+ * @package Example CTA Plugin
  */
 
 /**
  * Set up and load our class.
  */
-class SQS2016_Helper
+class EXCTA_Helper
 {
 
 	/**
@@ -22,7 +22,7 @@ class SQS2016_Helper
 	 *
 	 * @return mixed  $option   Either the found info, or false.
 	 */
-	public static function get_single_option( $key = 'squares-cta', $default = '', $serial = '' ) {
+	public static function get_single_option( $key = 'example-cta', $default = '', $serial = '' ) {
 
 		// Bail without a key.
 		if ( empty( $key ) ) {
@@ -90,10 +90,10 @@ class SQS2016_Helper
 	public static function get_cta_placement( $post_id = 0 ) {
 
 		// Fetch our placement setup
-		$place  = self::get_single_postmeta( $post_id, '_squares_post_cta', '', 'place' );
+		$place  = self::get_single_postmeta( $post_id, '_example_post_cta', '', 'place' );
 
 		// If we had no postmeta placement, then pull our global and return it.
-		return ! empty( $place ) ? $place : self::get_single_option( 'squares-cta', 'below', 'place' );
+		return ! empty( $place ) ? $place : self::get_single_option( 'example-cta', 'below', 'place' );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class SQS2016_Helper
 	 * @return array $types  The post types we are using.
 	 */
 	public static function get_supported_types() {
-		return apply_filters( 'squarescta_post_types', array( 'post' ) );
+		return apply_filters( 'example_cta_post_types', array( 'post' ) );
 	}
 
 	/**
@@ -121,11 +121,11 @@ class SQS2016_Helper
 		);
 
 		// Return our editor args, with a filter.
-		return apply_filters( 'squarescta_editor_args', $args );
+		return apply_filters( 'example_cta_editor_args', $args, $name );
 	}
 
 	// End the class.
 }
 
 // Instantiate our class.
-$SQS2016_Helper = new SQS2016_Helper();
+$EXCTA_Helper = new EXCTA_Helper();

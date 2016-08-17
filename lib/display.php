@@ -1,16 +1,16 @@
 <?php
 /**
- * Squares 2016 CTA - display functions
+ * Example CTA Plugin - display functions
  *
  * Contains our front-end display functions.
  *
- * @package Squares 2016 CTA
+ * @package Example CTA Plugin
  */
 
 /**
  * Set up and load our class.
  */
-class SQS2016_Display
+class EXCTA_Display
 {
 
 	/**
@@ -20,7 +20,7 @@ class SQS2016_Display
 	 */
 	public function init() {
 		add_filter( 'the_content',                  array( $this, 'display_cta'         )           );
-		add_shortcode( 'squarescta',                array( $this, 'shortcode'           )           );
+		add_shortcode( 'example_cta',               array( $this, 'shortcode'           )           );
 	}
 
 	/**
@@ -33,20 +33,20 @@ class SQS2016_Display
 	public function display_cta( $content ) {
 
 		// Bail if we aren't on a singular item or one we support.
-		if ( ! is_singular() || ! in_array( get_post_type(), SQS2016_Helper::get_supported_types() ) ) {
-			return str_replace( '[squarescta]', '', $content );
+		if ( ! is_singular() || ! in_array( get_post_type(), EXCTA_Helper::get_supported_types() ) ) {
+			return str_replace( '[example_cta]', '', $content );
 		}
 
 		// Call our global post object.
 		global $post;
 
 		// Check for the disable flag and bail right away if it's there.
-		if ( false !== $check = SQS2016_Helper::get_single_postmeta( $post->ID, '_squares_post_cta_disable' ) ) {
-			return str_replace( '[squarescta]', '', $content );
+		if ( false !== $check = EXCTA_Helper::get_single_postmeta( $post->ID, '_example_cta_post_disable' ) ) {
+			return str_replace( '[example_cta]', '', $content );
 		}
 
 		// Fetch our placement setup
-		$place  = SQS2016_Helper::get_cta_placement( $post->ID );
+		$place  = EXCTA_Helper::get_cta_placement( $post->ID );
 
 		// If we set to "manual", then bail.
 		if ( 'manual' === $place ) {
@@ -55,7 +55,7 @@ class SQS2016_Display
 
 		// Go get my box, and bail if we don't have one.
 		if ( false === $build = self::build_cta_display( $post->ID, $place ) ) {
-			return str_replace( '[squarescta]', '', $content );
+			return str_replace( '[example_cta]', '', $content );
 		}
 
 		// Return above or below the content, depending on selection.
@@ -73,7 +73,7 @@ class SQS2016_Display
 	public function shortcode( $atts, $content = null ) {
 
 		// Bail if we aren't on a singular item or one we support.
-		if ( ! is_singular() || ! in_array( get_post_type(), SQS2016_Helper::get_supported_types() ) ) {
+		if ( ! is_singular() || ! in_array( get_post_type(), EXCTA_Helper::get_supported_types() ) ) {
 			return;
 		}
 
@@ -81,12 +81,12 @@ class SQS2016_Display
 		global $post;
 
 		// Check for the disable flag and bail right away if it's there.
-		if ( false !== $check = SQS2016_Helper::get_single_postmeta( $post->ID, '_squares_post_disable' ) ) {
+		if ( false !== $check = EXCTA_Helper::get_single_postmeta( $post->ID, '_example_cta_post_disable' ) ) {
 			return;
 		}
 
 		// Fetch our placement setup
-		$place  = SQS2016_Helper::get_cta_placement( $post->ID );
+		$place  = EXCTA_Helper::get_cta_placement( $post->ID );
 
 		// If we set to "manual", then bail.
 		if ( 'manual' !== $place ) {
@@ -108,17 +108,17 @@ class SQS2016_Display
 	public static function build_cta_display( $post_id = 0, $place = '' ) {
 
 		// Fetch our postmeta items.
-		$title  = SQS2016_Helper::get_single_postmeta( $post_id, '_squares_post_cta', '', 'title' );
-		$text   = SQS2016_Helper::get_single_postmeta( $post_id, '_squares_post_cta', '', 'text' );
+		$title  = EXCTA_Helper::get_single_postmeta( $post_id, '_example_cta_postmeta', '', 'title' );
+		$text   = EXCTA_Helper::get_single_postmeta( $post_id, '_example_cta_postmeta', '', 'text' );
 
 		// If we had no postmeta title, then pull our global.
 		if ( empty( $title ) ) {
-			$title  = SQS2016_Helper::get_single_option( 'squares-cta', '', 'title' );
+			$title  = EXCTA_Helper::get_single_option( 'example-cta', '', 'title' );
 		}
 
 		// If we had no postmeta text, then pull our global.
 		if ( empty( $text ) ) {
-			$text   = SQS2016_Helper::get_single_option( 'squares-cta', '', 'text' );
+			$text   = EXCTA_Helper::get_single_option( 'example-cta', '', 'text' );
 		}
 
 		// If we have no text, we should probably bail since there's no CTA to display.
@@ -127,19 +127,19 @@ class SQS2016_Display
 		}
 
 		// Set a class to use.
-		$class  = ! empty( $place ) ? 'squares-cta-box-' . esc_attr( $place ) . ' squares-cta-box' : 'squares-cta-box';
+		$class  = ! empty( $place ) ? 'example-cta-box-' . esc_attr( $place ) . ' example-cta-box' : 'example-cta-box';
 
 		// Now begin the markup build.
 		$build  = '';
 
 		// But a box around it.
-		$build .= '<div id="squares-cta-box-' . absint( $post_id ) . '" class="' . esc_html( $class ) . '">';
+		$build .= '<div id="example-cta-box-' . absint( $post_id ) . '" class="' . esc_html( $class ) . '">';
 
 			// Got a title? Let's show them that special title.
-			$build .= ! empty( $title ) ? '<h3 class="squares-cta-box-title">' . esc_attr( $title ) . '</h3>' : '';
+			$build .= ! empty( $title ) ? '<h3 class="example-cta-box-title">' . esc_attr( $title ) . '</h3>' : '';
 
 			// Since we already checked for text, we don't have to check again.
-			$build .= '<div class="squares-cta-box-text">';
+			$build .= '<div class="example-cta-box-text">';
 			$build .= wpautop( $text );
 			$build .= '</div>';
 
@@ -147,12 +147,12 @@ class SQS2016_Display
 		$build .= '</div>';
 
 		// Return the markup.
-		return apply_filters( 'squarescta_html_display', $build, $post_id );
+		return apply_filters( 'example_cta_html_display', $build, $post_id );
 	}
 
 	// End the class.
 }
 
 // Instantiate our class.
-$SQS2016_Display = new SQS2016_Display();
-$SQS2016_Display->init();
+$EXCTA_Display = new EXCTA_Display();
+$EXCTA_Display->init();

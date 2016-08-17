@@ -1,16 +1,16 @@
 <?php
 /**
- * Squares 2016 CTA - settings functions
+ * Example CTA Plugin - settings functions
  *
  * Contains settings page related functions.
  *
- * @package Squares 2016 CTA
+ * @package Example CTA Plugin
  */
 
 /**
  * Set up and load our class.
  */
-class SQS2016_Settings
+class EXCTA_Settings
 {
 
 	/**
@@ -30,10 +30,10 @@ class SQS2016_Settings
 	public function load_settings() {
 
 		// Add our setting for the amount of days to keep a sticky, and the total number of them.
-		register_setting( 'reading', 'squares-cta', array( $this, 'data_sanitize' ) );
+		register_setting( 'reading', 'example-cta', array( $this, 'data_sanitize' ) );
 
 		// And create our settings section.
-		add_settings_section( 'squares-cta', __( 'Squares 2016 Call To Action', 'squares2016-cta' ), array( $this, 'settings' ), 'reading' );
+		add_settings_section( 'example-cta', __( 'Example Call To Action', 'example-cta-plugin' ), array( $this, 'settings' ), 'reading' );
 	}
 
 	/**
@@ -44,21 +44,21 @@ class SQS2016_Settings
 	public function settings( $args ) {
 
 		// Fetch our stored settings.
-		$place  = SQS2016_Helper::get_single_option( 'squares-cta', 'below', 'place' );
-		$title  = SQS2016_Helper::get_single_option( 'squares-cta', '', 'title' );
-		$text   = SQS2016_Helper::get_single_option( 'squares-cta', '', 'text' );
+		$place  = EXCTA_Helper::get_single_option( 'example-cta', 'below', 'place' );
+		$title  = EXCTA_Helper::get_single_option( 'example-cta', '', 'title' );
+		$text   = EXCTA_Helper::get_single_option( 'example-cta', '', 'text' );
 
 		// Set our settings for the WP_Editor call.
-		$editor = SQS2016_Helper::get_wp_editor_args( 'squares-cta[text]' );
+		$editor = EXCTA_Helper::get_wp_editor_args( 'example-cta[text]' );
 
 		// Add a div to wrap our whole thing for clean.
 		echo '<div class="' . esc_attr( $args['id'] ) . '-wrap">';
 
 		// Add our intro content.
-		echo '<p>' . esc_html__( 'Enter the title and content for your call to action.', 'squares2016-cta' ) . '</p>';
+		echo '<p>' . esc_html__( 'Enter the title and content for your call to action.', 'example-cta-plugin' ) . '</p>';
 
 		// Now set up the table with each value.
-		echo '<table id="' . esc_attr( $args['id'] ) . '" class="squares-cta-settings-table form-table">';
+		echo '<table id="' . esc_attr( $args['id'] ) . '" class="example-cta-settings-table form-table">';
 		echo '<tbody>';
 
 			// Our placement radio field.
@@ -66,28 +66,28 @@ class SQS2016_Settings
 
 				// The field label.
 				echo '<th scope="row">';
-					echo '<label>' . esc_html__( 'CTA Placement', 'squares2016-cta' ) . '</label>';
+					echo '<label>' . esc_html__( 'CTA Placement', 'example-cta-plugin' ) . '</label>';
 				echo '</th>';
 
 				// The input field.
 				echo '<td>';
 
-					echo '<span class="squares-cta-radio">';
-						echo '<label for="squares-cta-place-above">';
-						echo '<input type="radio" id="squares-cta-place-above" name="squares-cta[place]" value="above" ' . checked( $place, 'above', false ) . ' />';
-						echo ' ' . esc_html__( 'Place above post content.', 'squares2016-cta' ) . '</label>';
+					echo '<span class="example-cta-radio">';
+						echo '<label for="example-cta-place-above">';
+						echo '<input type="radio" id="example-cta-place-above" name="example-cta[place]" value="above" ' . checked( $place, 'above', false ) . ' />';
+						echo ' ' . esc_html__( 'Place above post content.', 'example-cta-plugin' ) . '</label>';
 					echo '</span>';
 
-					echo '<span class="squares-cta-radio">';
-						echo '<label for="squares-cta-place-below">';
-						echo '<input type="radio" id="squares-cta-place-below" name="squares-cta[place]" value="below" ' . checked( $place, 'below', false ) . ' />';
-						echo ' ' . esc_html__( 'Place below post content.', 'squares2016-cta' ) . '</label>';
+					echo '<span class="example-cta-radio">';
+						echo '<label for="example-cta-place-below">';
+						echo '<input type="radio" id="example-cta-place-below" name="example-cta[place]" value="below" ' . checked( $place, 'below', false ) . ' />';
+						echo ' ' . esc_html__( 'Place below post content.', 'example-cta-plugin' ) . '</label>';
 					echo '</span>';
 
-					echo '<span class="squares-cta-radio">';
-						echo '<label for="squares-cta-place-manual">';
-						echo '<input type="radio" id="squares-cta-place-manual" name="squares-cta[place]" value="manual" ' . checked( $place, 'manual', false ) . ' />';
-						echo ' ' . esc_html__( 'Manually insert post content via shortcode.', 'squares2016-cta' ) . '</label>';
+					echo '<span class="example-cta-radio">';
+						echo '<label for="example-cta-place-manual">';
+						echo '<input type="radio" id="example-cta-place-manual" name="example-cta[place]" value="manual" ' . checked( $place, 'manual', false ) . ' />';
+						echo ' ' . esc_html__( 'Manually insert post content via shortcode.', 'example-cta-plugin' ) . '</label>';
 					echo '</span>';
 
 				echo '</td>';
@@ -100,12 +100,12 @@ class SQS2016_Settings
 
 				// The field label.
 				echo '<th scope="row">';
-					echo '<label for="squares-cta-title">' . esc_html__( 'CTA Title', 'squares2016-cta' ) . '</label>';
+					echo '<label for="example-cta-title">' . esc_html__( 'CTA Title', 'example-cta-plugin' ) . '</label>';
 				echo '</th>';
 
 				// The input field.
 				echo '<td>';
-					echo '<input type="text" id="squares-cta-title" class="widefat" name="squares-cta[title]" value="' . esc_attr( $title ) . '" />';
+					echo '<input type="text" id="example-cta-title" class="widefat" name="example-cta[title]" value="' . esc_attr( $title ) . '" />';
 				echo '</td>';
 
 			// Close our title field.
@@ -116,19 +116,19 @@ class SQS2016_Settings
 
 				// The field label.
 				echo '<th scope="row">';
-					echo '<label for="squares-cta-text">' . esc_html__( 'CTA Text', 'squares2016-cta' ) . '</label>';
+					echo '<label for="example-cta-text">' . esc_html__( 'CTA Text', 'example-cta-plugin' ) . '</label>';
 				echo '</th>';
 
 				// The input field.
 				echo '<td>';
-					wp_editor( $text, 'squares_cta_text', $editor );
+					wp_editor( $text, 'example_cta_text', $editor );
 				echo '</td>';
 
 			// Close our title field.
 			echo '</tr>';
 
 			// Call our action to include any extra settings.
-			do_action( 'squarescta_settings_page', $args );
+			do_action( 'example_cta_settings_page', $args );
 
 		// Close the table.
 		echo '</tbody>';
@@ -161,12 +161,12 @@ class SQS2016_Settings
 
 		// And return our input with a filter to allow
 		// additional settings to be added later.
-		return apply_filters( 'squarescta_data_sanitize', $input );
+		return apply_filters( 'example_cta_data_sanitize', $input );
 	}
 
 	// End the class.
 }
 
 // Instantiate our class.
-$SQS2016_Settings = new SQS2016_Settings();
-$SQS2016_Settings->init();
+$EXCTA_Settings = new EXCTA_Settings();
+$EXCTA_Settings->init();

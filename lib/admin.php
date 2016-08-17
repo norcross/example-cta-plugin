@@ -1,16 +1,16 @@
 <?php
 /**
- * Squares 2016 CTA - admin functions
+ * Example CTA Plugin - admin functions
  *
  * Contains more generic admin related functions.
  *
- * @package Squares 2016 CTA
+ * @package Example CTA Plugin
  */
 
 /**
  * Set up and load our class.
  */
-class SQS2016_Admin
+class EXCTA_Admin
 {
 
 	/**
@@ -39,10 +39,10 @@ class SQS2016_Admin
 
 		// Set a suffix for loading the minified or normal.
 		$sx = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.css' : '.min.css';
-		$vs = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : SQS2016_VER;
+		$vs = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : EXM_CTA_VER;
 
 		// Load the CSS file itself.
-		wp_enqueue_style( 'squares-cta', plugins_url( '/css/squarescta.admin' . $sx, __FILE__ ), array(), $vs, 'all' );
+		wp_enqueue_style( 'example-cta', plugins_url( '/css/examplecta.admin' . $sx, __FILE__ ), array(), $vs, 'all' );
 	}
 
 	/**
@@ -61,15 +61,15 @@ class SQS2016_Admin
 
 		// Set a suffix for loading the minified or normal.
 		$sx = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
-		$vs = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : SQS2016_VER;
+		$vs = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : EXM_CTA_VER;
 
 		// Load the JS file itself.
-		wp_enqueue_script( 'squares-cta', plugins_url( '/js/squarescta.admin' . $sx, __FILE__ ) , array( 'jquery' ), $vs, true );
+		wp_enqueue_script( 'example-cta', plugins_url( '/js/examplecta.admin' . $sx, __FILE__ ) , array( 'jquery' ), $vs, true );
 	}
 
 	// End the class.
 }
 
 // Instantiate our class.
-$SQS2016_Admin = new SQS2016_Admin();
-$SQS2016_Admin->init();
+$EXCTA_Admin = new EXCTA_Admin();
+$EXCTA_Admin->init();
