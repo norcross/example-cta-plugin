@@ -90,7 +90,7 @@ class EXCTA_Helper
 	public static function get_cta_placement( $post_id = 0 ) {
 
 		// Fetch our placement setup
-		$place  = self::get_single_postmeta( $post_id, '_example_post_cta', '', 'place' );
+		$place  = self::get_single_postmeta( $post_id, '_example_cta_postmeta', '', 'place' );
 
 		// If we had no postmeta placement, then pull our global and return it.
 		return ! empty( $place ) ? $place : self::get_single_option( 'example-cta', 'below', 'place' );

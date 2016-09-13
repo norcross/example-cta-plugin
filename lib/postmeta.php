@@ -203,13 +203,13 @@ class EXCTA_PostMeta
 			return;
 		}
 
-		// Make sure we have our actual meta coming through.
-		if ( empty( $_POST['example-cta-post'] ) && empty( $_POST['example-cta-post-disable'] ) ) {
+		// Check against the post types we've allowed.
+		if ( ! in_array( get_post_type( $post_id ), EXCTA_Helper::get_supported_types() ) ) {
 			return;
 		}
 
-		// Check against the post types we've allowed.
-		if ( ! in_array( get_post_type( $post_id ), EXCTA_Helper::get_supported_types() ) ) {
+		// Make sure we have our actual meta coming through.
+		if ( empty( $_POST['example-cta-post'] ) && empty( $_POST['example-cta-post-disable'] ) ) {
 			return;
 		}
 

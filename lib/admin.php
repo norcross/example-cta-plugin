@@ -38,11 +38,11 @@ class EXCTA_Admin
 		}
 
 		// Set a suffix for loading the minified or normal.
-		$sx = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.css' : '.min.css';
-		$vs = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : EXM_CTA_VER;
+		$file   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'examplecta.admin.css' : 'examplecta.admin.min.css';
+		$vers   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : EXM_CTA_VER;
 
 		// Load the CSS file itself.
-		wp_enqueue_style( 'example-cta', plugins_url( '/css/examplecta.admin' . $sx, __FILE__ ), array(), $vs, 'all' );
+		wp_enqueue_style( 'example-cta', plugins_url( '/css/' . $file, __FILE__ ), array(), $vers, 'all' );
 	}
 
 	/**
@@ -60,11 +60,11 @@ class EXCTA_Admin
 		}
 
 		// Set a suffix for loading the minified or normal.
-		$sx = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.js' : '.min.js';
-		$vs = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : EXM_CTA_VER;
+		$file   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'examplecta.admin.js' : 'examplecta.admin.min.js';
+		$vers   = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : EXM_CTA_VER;
 
 		// Load the JS file itself.
-		wp_enqueue_script( 'example-cta', plugins_url( '/js/examplecta.admin' . $sx, __FILE__ ) , array( 'jquery' ), $vs, true );
+		wp_enqueue_script( 'example-cta', plugins_url( '/js/' . $file, __FILE__ ) , array( 'jquery' ), $vers, true );
 	}
 
 	// End the class.

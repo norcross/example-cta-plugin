@@ -88,7 +88,7 @@ class EXCTA_Display
 		// Fetch our placement setup
 		$place  = EXCTA_Helper::get_cta_placement( $post->ID );
 
-		// If we set to "manual", then bail.
+		// If we did NOT set to "manual", then bail.
 		if ( 'manual' !== $place ) {
 			return;
 		}
@@ -123,7 +123,7 @@ class EXCTA_Display
 
 		// If we have no text, we should probably bail since there's no CTA to display.
 		if ( empty( $text ) ) {
-			return;
+			return false;
 		}
 
 		// Set a class to use.
