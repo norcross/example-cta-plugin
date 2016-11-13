@@ -59,6 +59,9 @@ class Example_CTA_Core
 	 */
 	public function load_files() {
 
+		// Load our helper file.
+		require_once( EXM_CTA_DIR . 'lib/helper.php' );
+
 		// Load our back end.
 		if ( is_admin() ) {
 			require_once( EXM_CTA_DIR . 'lib/admin.php' );
@@ -70,9 +73,6 @@ class Example_CTA_Core
 		if ( ! is_admin() ) {
 			require_once( EXM_CTA_DIR . 'lib/display.php' );
 		}
-
-		// Load our helper file.
-		require_once( EXM_CTA_DIR . 'lib/helper.php' );
 	}
 
 	// End the class.
