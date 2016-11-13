@@ -118,6 +118,7 @@ class EXCTA_Helper
 		$args   = array(
 			'textarea_rows' => 6,
 			'textarea_name' => esc_attr( $name ),
+			'quicktags'     => array( 'buttons' => 'strong,em,ul,ol,li,link,img' ),
 		);
 
 		// Return our editor args, with a filter.
