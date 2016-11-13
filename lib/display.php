@@ -24,7 +24,7 @@ class EXCTA_Display
 	}
 
 	/**
-	 * Our content filter to fetch and display the CTA
+	 * Our content filter to fetch and display the CTA.
 	 *
 	 * @param  mixed $content  The existing post content.
 	 *
@@ -45,7 +45,7 @@ class EXCTA_Display
 			return str_replace( '[example_cta]', '', $content );
 		}
 
-		// Fetch our placement setup
+		// Fetch our placement setup.
 		$place  = EXCTA_Helper::get_cta_placement( $post->ID );
 
 		// If we set to "manual", then bail.
@@ -85,7 +85,7 @@ class EXCTA_Display
 			return;
 		}
 
-		// Fetch our placement setup
+		// Fetch our placement setup.
 		$place  = EXCTA_Helper::get_cta_placement( $post->ID );
 
 		// If we did NOT set to "manual", then bail.

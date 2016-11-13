@@ -193,7 +193,7 @@ class EXCTA_PostMeta
 			return;
 		}
 
-		// Make sure the current user has the capability to change
+		// Make sure the current user has the capability to change.
 		if ( ! current_user_can( 'publish_posts' ) ) {
 			return;
 		}

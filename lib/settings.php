@@ -29,17 +29,17 @@ class EXCTA_Settings
 	 */
 	public function load_settings() {
 
-		// Add our setting for the amount of days to keep a sticky, and the total number of them.
+		// Add our setting for the serialized array of items in the default CTA.
 		register_setting( 'reading', 'example-cta', array( $this, 'data_sanitize' ) );
 
-		// And create our settings section.
+		// Create our settings section, hooked into the "reading" section.
 		add_settings_section( 'example-cta', __( 'Example Call To Action', 'example-cta-plugin' ), array( $this, 'settings' ), 'reading' );
 	}
 
 	/**
 	 * Our settings section.
 	 *
-	 * @param  array $args  The arguments from the add_settings_section call.
+	 * @param  array $args  The arguments from the `add_settings_section` call.
 	 */
 	public function settings( $args ) {
 

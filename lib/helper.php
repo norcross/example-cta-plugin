@@ -81,7 +81,7 @@ class EXCTA_Helper
 	}
 
 	/**
-	 * Get the selected placement for the CTA
+	 * Get the selected placement for the CTA.
 	 *
 	 * @param  integer $post_id  The potential post ID being viewed.
 	 *
