@@ -118,7 +118,7 @@ class EXCTA_PostMeta
 					echo '<span class="example-cta-radio">';
 						echo '<label for="example-cta-post-place-manual">';
 						echo '<input type="radio" id="example-cta-post-place-manual" name="example-cta-post[place]" value="manual" ' . checked( $place, 'manual', false ) . ' />';
-						echo ' ' . esc_html__( 'Manually insert post content via <code>[example_cta]</code> shortcode.', 'example-cta-plugin' ) . '</label>';
+						echo ' ' . sprintf( __( 'Manually insert post content via %s shortcode.', 'example-cta-plugin' ), '<code>[example_cta]</code>' ) . '</label>';
 					echo '</span>';
 
 				echo '</td>';
